@@ -26,10 +26,9 @@ app.get('/', (req, res) => {
     res.render('home')
 }); 
 
-app.get('/makehike', async (req, res) => {
-    const hike = new Hike({title: 'olympus', description: 'godly'});
-    await hike.save();
-    res.send(hike)
+app.get('/hikes', async (req, res) => {
+    const hikes = await Hike.find({});
+    res.render('hikes/index', { hikes })
 }); 
 
 const PORT = 3000
