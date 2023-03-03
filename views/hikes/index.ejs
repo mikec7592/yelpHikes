@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>All Hikes</h1>
+    <header>
+        <a href="/hikes/new">Add Hike</a>
+    </header>
     <ul>
         <% for (let hike of hikes) { %>
             <li><a href="/hikes/<%= hike._id %>"><%= hike.title %></a></li>
