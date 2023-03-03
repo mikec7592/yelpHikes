@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Edit Hike</h1>
+    <form action="/hikes/<%=hike._id%>?_method=PUT" method="POST">
+        <div>
+            <label for="'title">Title</label>
+            <input type="text" id="title" name="hike[title]" value="<%=hike.title %>">
+        </div>
+        <div>
+            <label for="'title">Location</label>
+            <input type="text" id="title" name="hike[location]" value="<%=hike.location %>">
+        </div>
+        <button>Update Hike</button>
+    </form>
+    <footer>
+        <a href="/hikes/<%= hike._id%>">Back to Hike Details</a>
+        <a href="/hikes">Back to all Hikes</a>
+    </footer>
+</body>
+</html>
