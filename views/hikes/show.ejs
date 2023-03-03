@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hikes</title>
+    <title>Show</title>
 </head>
 <body>
-    <h1>All Hikes</h1>
-    <ul>
-        <% for (let hike of hikes) { %>
-            <li><a href="/hikes/<%= hike._id %>"><%= hike.title %></a></li>
-        <%  }%>
-    </ul>
+    <h1><%= hike.title %></h1>
+    <h1><%= hike.location %></h1>
 </body>
 </html>

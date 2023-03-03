@@ -31,6 +31,11 @@ app.get('/hikes', async (req, res) => {
     res.render('hikes/index', { hikes })
 }); 
 
+app.get('/hikes/:id', async (req, res) => {
+    const hike = await Hike.findById(req.params.id)
+    res.render('hikes/show', { hike });
+})
+
 const PORT = 3000
 
 app.listen(PORT, () => {
