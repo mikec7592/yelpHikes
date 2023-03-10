@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const Hike = require('./models/hike');
 
@@ -18,7 +19,7 @@ db.once('open', () => {
 
 const app = express();
 
-
+app.engine('ejs',ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
@@ -59,6 +60,12 @@ app.put('/hikes/:id', async (req, res) => {
     const { id } = req.params;
     const hike = await Hike.findByIdAndUpdate(id, { ...req.body.hike});
     res.redirect(`/hikes/${hike._id}`)
+})
+
+app.delete('/hikes/:id', async (req, res) => {
+    const { id } = req.params;
+    await Hike.findByIdAndDelete(id);
+    res.redirect('/hikes');
 })
 
 const PORT = 3000
