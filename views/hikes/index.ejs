@@ -3,8 +3,22 @@
 <header>
     <a href="/hikes/new">Add Hike</a>
 </header>
-<ul>
     <% for (let hike of hikes) { %>
-        <li><a href="/hikes/<%= hike._id %>"><%= hike.title %></a></li>
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <img class="img-fluid" src="<%= hike.image %>" alt="random forst image">
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= hike.title %></h5>
+                        <p class="card-text"><%= hike.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted"><%= hike.location %></small>
+                        </p>
+                        <a href="/hikes/<%=hike._id%>" class="btn btn-primary">View <%=hike.title %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     <%  }%>
-</ul>
