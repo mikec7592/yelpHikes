@@ -2,29 +2,41 @@
 <div class="row">
     <h1 class="text-center">New Hike</h1>
     <div class="col-6 offset-3">
-        <form action="/hikes" method="POST">
+        <form action="/hikes" method="POST" novalidate class="validated-form">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control " type="text" id="title" name="hike[title]">
+                <input class="form-control " type="text" id="title" name="hike[title]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="title">Location</label>
-                <input class="form-control" type="text" id="location" name="hike[location]">
+                <input class="form-control" type="text" id="location" name="hike[location]" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="hike[image]">
+                <input class="form-control" type="text" id="image" name="hike[image]" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="price">Price</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="price-label">$</span>
-                    <input type="text" class="form-control" id="price" name="hike[price]" placeholder="0.00" aria-label="price" aria-describedby="price-label">
-                  </div>
+                    <input type="text" class="form-control" id="price" name="hike[price]" placeholder="0.00" aria-label="price" aria-describedby="price-label" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="'text" id="description" name="hike[description]"></textarea>
+                <textarea class="form-control" type="'text" id="description" name="hike[description]" required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <button class="btn btn-success">Add Hike</button>
         </form>
