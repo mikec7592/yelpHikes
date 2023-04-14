@@ -2,11 +2,12 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const { hikeSchema } = require('./schemas')
+const { hikeSchema, reviewSchema } = require('./schemas')
 const catchAsync = require('./utilities/catchAsync');
 const ExpressError = require('./utilities/expressError');
 const methodOverride = require('method-override');
 const Hike = require('./models/hike');
+const Review = require('./models/review');
 // const { error } = require('console');
 
 mongoose.connect('mongodb://localhost:27017/yelp-hike', {
@@ -40,6 +41,16 @@ const validateHike = (req, res, next) => {
     }
 }
 
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
+
 
 app.get('/', (req, res) => {
     res.render('home')
@@ -63,7 +74,7 @@ app.post('/hikes', validateHike, catchAsync(async (req, res, next) => {
 }))
 
 app.get('/hikes/:id', catchAsync(async (req, res) => {
-    const hike = await Hike.findById(req.params.id)
+    const hike = await Hike.findById(req.params.id).populate('reviews');
     res.render('hikes/show', { hike });
 }))
 
@@ -82,6 +93,22 @@ app.delete('/hikes/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     await Hike.findByIdAndDelete(id);
     res.redirect('/hikes');
+}))
+
+app.post('/hikes/:id/reviews', validateReview, catchAsync(async (req, res) => {
+    const hike = await Hike.findById(req.params.id);
+    const review = new Review(req.body.review);
+    hike.reviews.push(review);
+    await review.save();
+    await hike.save();
+    res.redirect(`/hikes/${hike._id}`);
+}))
+
+app.delete('/hikes/:id/reviews/:reviewId', catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Hike.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
+    await Review.findByIdAndDelete(reviewId)
+    res.redirect(`/hikes/${id}`)
 }))
 
 app.all('*', (req, res, next) => {
