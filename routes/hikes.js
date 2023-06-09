@@ -1,21 +1,9 @@
 const express = require('express')
 const router = express.Router();
-const { hikeSchema} = require('../schemas')
-const { isLoggedIn } = require('../middleware');
+const { isLoggedIn, validateHike, isAuthor } = require('../middleware');
 const catchAsync = require('../utilities/catchAsync');
-const ExpressError = require('../utilities/expressError');
 const Hike = require('../models/hike');
 
-
-const validateHike = (req, res, next) => {
-    const { error } = hikeSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
 
 router.get('/', catchAsync(async (req, res) => {
     const hikes = await Hike.find({});
@@ -44,7 +32,7 @@ router.get('/:id', catchAsync(async (req, res) => {
     res.render('hikes/show', { hike });
 }))
 
-router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     const hike = await Hike.findById(req.params.id)
     if (!hike) {
         req.flash('error', 'Could not find hike.');
@@ -53,7 +41,7 @@ router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
     res.render('hikes/edit', { hike });
 }))
 
-router.put('/:id', isLoggedIn, validateHike, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, isAuthor, validateHike, catchAsync(async (req, res) => {
     const { id } = req.params;
     const hike = await Hike.findByIdAndUpdate(id, { ...req.body.hike});
     req.flash('success', 'Hike updated!')
