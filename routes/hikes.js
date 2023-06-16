@@ -24,7 +24,13 @@ router.post('/', isLoggedIn, validateHike, catchAsync(async (req, res, next) => 
 }))
 
 router.get('/:id', catchAsync(async (req, res) => {
-    const hike = await Hike.findById(req.params.id).populate('reviews').populate('author');
+    const hike = await Hike.findById(req.params.id).populate({
+        path: 'reviews',
+        populate: { 
+            path: 'author'
+        }
+    }).populate('author');
+    console.log(hike);
     if (!hike) {
         req.flash('error', 'Could not find hike.');
         return res.redirect('/hikes');
