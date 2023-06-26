@@ -6,18 +6,17 @@ const Hike = require('../models/hike');
 const hikes = require('../controllers/hikes')
 
 
-router.get('/', catchAsync(hikes.index)); 
+router.route('/')
+    .get(catchAsync(hikes.index))
+    .post(isLoggedIn, validateHike, catchAsync(hikes.createHike))
 
 router.get('/new', isLoggedIn, hikes.renderNewForm)
 
-router.post('/', isLoggedIn, validateHike, catchAsync(hikes.createHike))
-
-router.get('/:id', catchAsync(hikes.showHike))
+router.route('/:id')
+    .get(catchAsync(hikes.showHike))
+    .put(isLoggedIn, isAuthor, validateHike, catchAsync(hikes.updateHike))
+    .delete(isLoggedIn, catchAsync(hikes.destroyHike))
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(hikes.renderEditForm))
-
-router.put('/:id', isLoggedIn, isAuthor, validateHike, catchAsync(hikes.updateHike))
-
-router.delete('/:id', isLoggedIn, catchAsync(hikes.destroyHike))
 
 module.exports = router;
