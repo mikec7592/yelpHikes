@@ -4,12 +4,15 @@ const { isLoggedIn, validateHike, isAuthor } = require('../middleware');
 const catchAsync = require('../utilities/catchAsync');
 const Hike = require('../models/hike');
 const hikes = require('../controllers/hikes')
+const multer = require('multer')
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 
 router.route('/')
     .get(catchAsync(hikes.index))
-    .post(isLoggedIn, validateHike, catchAsync(hikes.createHike))
-
+    .post(isLoggedIn, upload.array('image'), validateHike, catchAsync(hikes.createHike))
+    
 router.get('/new', isLoggedIn, hikes.renderNewForm)
 
 router.route('/:id')

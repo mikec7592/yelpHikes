@@ -11,8 +11,10 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createHike = async (req, res, next) => {
     const hike = new Hike(req.body.hike);
+    hike.images =  req.files.map(f =>({ url: f.path, filename: f.filename }))
     hike.author = req.user._id;
     await hike.save();
+    console.log(hike);
     req.flash('success', 'Successfully added new hike!')
     res.redirect(`/hikes/${hike._id}`)
 }
