@@ -7,7 +7,7 @@
         <div class="card">
             <div class="row">
                 <div class="col">
-                    <img class="img-fluid" src="<%= hike.image %>" alt="random forst image">
+                    <img class="img-fluid" src="<%= hike.images[Math.floor(Math.random() * hike.images.length)].url %>" alt="random forst image">
                 </div>
                 <div class="col">
                     <div class="card-body">
