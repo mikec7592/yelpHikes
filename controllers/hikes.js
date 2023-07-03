@@ -46,6 +46,9 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateHike = async (req, res) => {
     const { id } = req.params;
     const hike = await Hike.findByIdAndUpdate(id, { ...req.body.hike});
+    const imgs = req.files.map(f =>({ url: f.path, filename: f.filename }));
+    hike.images.push(...imgs);
+    await hike.save();
     req.flash('success', 'Hike updated!')
     res.redirect(`/hikes/${hike._id}`)
 }
