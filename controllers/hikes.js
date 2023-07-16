@@ -1,4 +1,5 @@
 const Hike = require('../models/hike');
+const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async (req, res) => {
     const hikes = await Hike.find({});
@@ -26,7 +27,6 @@ module.exports.showHike = async (req, res) => {
             path: 'author'
         }
     }).populate('author');
-    console.log(hike);
     if (!hike) {
         req.flash('error', 'Could not find hike.');
         return res.redirect('/hikes');
@@ -49,6 +49,13 @@ module.exports.updateHike = async (req, res) => {
     const imgs = req.files.map(f =>({ url: f.path, filename: f.filename }));
     hike.images.push(...imgs);
     await hike.save();
+    if(req.body.deleteImages) {
+        for (let filename of req.body.deleteImages) {
+            await cloudinary.uploader.destroy(filename);
+        }
+        await hike.updateOne({$pull: { images: { filename: { $in: req.body.deleteImages } } } } )
+        console.log(hike)
+    }
     req.flash('success', 'Hike updated!')
     res.redirect(`/hikes/${hike._id}`)
 }
