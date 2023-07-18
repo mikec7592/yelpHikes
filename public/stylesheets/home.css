@@ -24,7 +24,7 @@ body {
 .nav-link:hover, .nav-link:focus {
     color: rgba(234, 169, 58, 0.668);
     transition: 0.7s;
-    border-bottom-color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.5);
  
 }
  
