@@ -12,6 +12,8 @@ ImageSchema.virtual('thumbnail').get(function() {
     return this.url.replace('/upload', '/upload/w_200');
 })
 
+const opts = { toJSON: { virtuals: true } };
+
 const HikeSchema = new Schema({
     title: String,
     images: [ImageSchema],
@@ -39,7 +41,15 @@ const HikeSchema = new Schema({
             ref: 'Review'
         }
     ]
-});
+}, opts);
+
+HikeSchema.virtual('properties.popUpMarker').get(function() {
+    return (`
+        <a href="/hikes/${this._id}">
+        ${this.title}
+        </a>
+    `);
+})
 
 HikeSchema.post('findOneAndDelete', async function (doc) {
     if (doc) {
