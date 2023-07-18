@@ -7,7 +7,11 @@
         <div class="card">
             <div class="row">
                 <div class="col">
+                    <% if (hike.images.length) {  %>
                     <img class="img-fluid" src="<%= hike.images[Math.floor(Math.random() * hike.images.length)].url %>" alt="random forst image">
+                    <% } else { %>
+                     <img class="img-fluid" src="https://res.cloudinary.com/dr1j1blc6/image/upload/v1688416952/YelpHikes/nwcaw3ursumlozvdmk4l.jpg" alt="random forst image">
+                    <% } %>
                 </div>
                 <div class="col">
                     <div class="card-body">
