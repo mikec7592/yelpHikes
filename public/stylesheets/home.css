@@ -21,8 +21,9 @@ body {
     border-bottom: 0.25rem solid transparent;
 }
  
-.nav-link:hover {
-    color: rgba(255, 255, 255, 0.5);
+.nav-link:hover, .nav-link:focus {
+    color: rgba(234, 169, 58, 0.668);
+    transition: 0.7s;
     border-bottom-color: white;
  
 }
@@ -33,7 +34,12 @@ body {
  
 }
  
-.btn-secondary, .btn-secondary:hover {
+.btn-secondary {
     color: #333;
     text-shadow: none;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+    color: rgba(234, 169, 58, 0.668);
+    transition: 0.7s;
 }
