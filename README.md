@@ -54,15 +54,15 @@ YelpHikes is a full-stack application built to help you find and explore local a
 
 | HTTP Request | URL                | Method   |
 | ------------ | ------------------ | -------- |
-| Index        | /hikes/            | `GET`    |
-| New          | /hikess/new/       | `GET`    |
-| Post New     | /hikes/            | `POST`   |
-| Edit         | /hikes/:id/edit/   | `GET`    |
-| Update       | /hikes/:id/        | `PUT`    |
-| Show         | /hikes/:id/        | `GET`    |
-| Delete       | /hikes/:id/        | `Delete` |
+| Index        | /hikes             | `GET`    |
+| New          | /hikess/new        | `GET`    |
+| Post New     | /hikes             | `POST`   |
+| Edit         | /hikes/:id/edit    | `GET`    |
+| Update       | /hikes/:id         | `PUT`    |
+| Show         | /hikes/:id         | `GET`    |
+| Delete       | /hikes/:id         | `Delete` |
 
-- **Sample body for `POST` to `/hikes/`**
+- **Sample body for `POST` to `/hikes`**
 
 ```javascript
 {
