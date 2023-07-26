@@ -7,6 +7,7 @@ module.exports.registerUser = async (req, res, next) => {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
         const registeredUser = await User.register(user, password);
+        // logic to remember where a user was before login so they can continue from the sdame place once login is complete.  Defaults to /hikes.
         const redirectUrl = res.locals.returnTo || '/hikes';
         req.login(registeredUser, err => {
             if (err) return next(err);
@@ -23,6 +24,7 @@ module.exports.renderLogin = (req, res) => res.render('users/login')
 
 module.exports.loginUser = (req, res) => {
     req.flash('success', `Welcome back ${req.user.username}` );
+    // logic to remember where a user was before login so they can continue from the sdame place once login is complete.  Defaults to /hikes.
     const redirectUrl = res.locals.returnTo || '/hikes';
     res.redirect(redirectUrl);
 }

@@ -56,6 +56,8 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+// passport for authentication and authorization
+
 app.use(passport.initialize())
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()))
@@ -70,11 +72,11 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/fakeUser', async (req, res) => {
-    const user = new User({ email: 'mango@gmail.com', username: 'mango'})
-    const newUser = await User.register(user, 'mangus');
-    res.send(newUser);
-})
+// app.get('/fakeUser', async (req, res) => {
+//     const user = new User({ email: 'mango@gmail.com', username: 'mango'})
+//     const newUser = await User.register(user, 'mangus');
+//     res.send(newUser);
+// })
 
 app.use('/', userRoutes)
 app.use('/hikes', hikeRoutes)

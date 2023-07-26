@@ -12,6 +12,7 @@
           </div>
           <% }) %>
         </div>
+        <!-- conditional to check if there are multiple images , if so creates a carousel -->
         <% if(hike.images.length > 1) {%>
         <button class="carousel-control-prev" type="button" data-bs-target="#hikeCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -34,6 +35,7 @@
               <li class="list-group-item">$<%= hike.price %>/night</li>
               <!-- <li class="list-group-item"><%= hike.rating %></li> -->
             </ul>
+            <!-- conditional to check if current user is creator of hike to display additional options -->
             <% if (currentUser && hike.author.equals(currentUser._id)) { %>
             <div class="card-body">
               <a class="card-link btn btn-info" href="/hikes/<%= hike._id%>/edit">Edit</a>
@@ -76,6 +78,7 @@
         <button class="btn btn-success mb-3">Submit Review</button>
       </form>
       <% } %>
+      <!-- mapping over all submited reviews to display -->
       <% for (let review of hike.reviews) { %>
       <div class="card mb-3">
         <div class="card-body">
@@ -85,6 +88,7 @@
           </p>
           <h6 class="card-subtitle mb-2 text-muted">By: <%= review.author.username %></h6>
           <p class="card-text">Review: <%= review.body %></p>
+          <!-- conditional to check if current user is creator of hike to display additional options -->
           <% if (currentUser && review.author.equals(currentUser._id)) { %>
           <form action="/hikes/<%= hike._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
             <button class="btn btn-sm btn-danger">Delete</button>

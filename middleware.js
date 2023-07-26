@@ -15,6 +15,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.validateHike = (req, res, next) => {
     const { error } = hikeSchema.validate(req.body);
     if (error) {
+        // maps through error message if one occurs
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)
     } else {
@@ -46,6 +47,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 module.exports.validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);
     if (error) {
+        // Maps over error mesage if one is present
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)
     } else {

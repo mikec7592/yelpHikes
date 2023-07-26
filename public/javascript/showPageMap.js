@@ -7,7 +7,9 @@ const map = new mapboxgl.Map({
 });
 
 new mapboxgl.Marker()
+// sets a marker at hikes location using user input
     .setLngLat(hike.geometry.coordinates)
+    // pop up display info when a marker is clicked on
     .setPopup(
         new mapboxgl.Popup({ offset: 20 })
             .setHTML(

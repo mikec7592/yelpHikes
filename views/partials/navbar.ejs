@@ -11,6 +11,7 @@
           <a class="nav-link" href="/hikes/new">New Hike</a>
         </div>
         <div class="navbar-nav ms-auto">
+          <!-- conditional statment ot check if a user is logged in and then display appropriate options -->
           <% if(!currentUser) { %>
           <a class="nav-link" href="/login">Login</a>
           <a class="nav-link" href="/register">Register</a>
