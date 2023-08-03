@@ -1,5 +1,5 @@
 <% layout('layouts/boilerplate') %>
-<h1>Register</h1>
+<!-- <h1>Register</h1>
 <form action="/register" method="POST" novalidate class="validated-form">
     <div class="mb-3">
         <label class="form-label" for="username">Username</label>
@@ -23,4 +23,72 @@
         </div>
     </div>
     <button class="btn btn-success">Register</button>
-</form>
+</form> -->
+
+<div class="container d-flex  justify-content-center align-items-center mt-5 mb-5">
+    <div class="row flex-fill">                <!--PAY ATTENTION TO THIS LINE FOR CENTERING-->
+      <div class="col-md-6 offset-md-3 col-xl-6 offset-xl-3">     
+        <div class="card shadow ">
+            <div class="image ratio ratio-21x9">
+                <img src="https://images.unsplash.com/photo-1530792271526-7ddf516473b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGlraW5nJTIwYm9vdHN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60" alt="" class="card-img-top"/>
+            </div>
+          <div class="card-body">
+            <h4 class="card-title">Register</h4>
+          <form action="/login" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="username">Username:</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="username"
+                  name="username"
+                  required
+                  autofocus
+                />
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please provide a valid username.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Password:</label>
+                <input
+                  class="form-control"
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                />
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please provide a valid Password.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Email:</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                />
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please provide a valid email.
+                </div>
+            </div>
+            <!-- button classes to stretch login button across container/card -->
+            <button class="btn btn-success d-grid gap-2 col-8 mx-auto">Log In</button>
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>   

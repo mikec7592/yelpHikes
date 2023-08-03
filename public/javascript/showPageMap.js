@@ -1,6 +1,6 @@
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
-    container: 'map', // container ID
+    container: 'show-map', // container ID
     style: 'mapbox://styles/mapbox/outdoors-v12', // style URL
     center: hike.geometry.coordinates, // starting position [lng, lat]
     zoom: 12, // starting zoom
