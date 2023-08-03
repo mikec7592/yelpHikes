@@ -12,6 +12,7 @@ const ExpressError = require('./utilities/expressError');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const localStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
 const User = require('./models/user')
 
 const hikeRoutes = require('./routes/hikes')
@@ -42,6 +43,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(mongoSanitize());
+
 
 const sessionConfig = {
     secret: 'mango',
@@ -66,6 +69,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+    console.log(req.query);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
