@@ -7,7 +7,18 @@ center: [-103.5917, 40.6699],
 zoom: 3
 });
  
-map.addControl(new mapboxgl.NavigationControl());
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+map.addControl(
+    new mapboxgl.GeolocateControl({
+    positionOptions: {
+    enableHighAccuracy: true
+    },
+    // When active the map will receive updates to the device's location as it changes.
+    trackUserLocation: true,
+    // Draw an arrow next to the location dot to indicate which direction the device is heading.
+    showUserHeading: true
+    })
+    );
 
 map.on('load', () => {
 // Add a new source from our GeoJSON data and
