@@ -15,6 +15,7 @@ const localStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const User = require('./models/user');
+// const dbUrl = process.env.DB_URL;
 
 
 const scriptSrcUrls = [
@@ -50,8 +51,9 @@ const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users')
 
 // const { error } = require('console');
-
-mongoose.connect('mongodb://localhost:27017/yelp-hike', {
+// 'mongodb://localhost:27017/yelp-hike'
+mongoose.connect('mongodb://localhost:27017/yelp-hike'
+, {
     useNewUrlParser: true,
     // useCreateIndex: true,
     useUnifiedTopology: true,
@@ -103,7 +105,7 @@ app.use(
                 "'self'",
                 "blob:",
                 "data:",
-                `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`, //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`, 
                 "https://images.unsplash.com/",
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
