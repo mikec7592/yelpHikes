@@ -16,7 +16,7 @@ const localStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const User = require('./models/user');
-// const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL;
 
 
 const scriptSrcUrls = [
@@ -53,7 +53,7 @@ const userRoutes = require('./routes/users')
 
 // const { error } = require('console');
 // 'mongodb://localhost:27017/yelp-hike'
-mongoose.connect('mongodb://localhost:27017/yelp-hike'
+mongoose.connect(dbUrl
 , {
     useNewUrlParser: true,
     // useCreateIndex: true,
@@ -80,7 +80,7 @@ app.use(mongoSanitize());
 
 
 const store = MongoStore.create({
-    mongoUrl: 'mongodb://localhost:27017/yelp-hike',
+    mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: process.env.MY_SECRET
