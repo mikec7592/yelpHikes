@@ -7,6 +7,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const ExpressError = require('./utilities/expressError');
 const methodOverride = require('method-override');
@@ -78,7 +79,20 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize());
 
 
+const store = MongoStore.create({
+    mongoUrl: 'mongodb://localhost:27017/yelp-hike',
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'mango'
+    }
+});
+
+store.on('error', function (e) {
+    console.log('SESSION STORE ERROR', e)
+})
+
 const sessionConfig = {
+    store,
     name: 'MSession',
     secret: 'mango',
     resave: false,
