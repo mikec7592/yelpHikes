@@ -83,7 +83,7 @@ const store = MongoStore.create({
     mongoUrl: 'mongodb://localhost:27017/yelp-hike',
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'mango'
+        secret: process.env.MY_SECRET
     }
 });
 
@@ -94,7 +94,7 @@ store.on('error', function (e) {
 const sessionConfig = {
     store,
     name: 'MSession',
-    secret: 'mango',
+    secret: process.env.MY_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
