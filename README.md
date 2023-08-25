@@ -87,11 +87,10 @@ YelpHikes is a full-stack application built to help you find and explore local a
 
 ## Example Hike creation
 
-![New Hike Example](/public/images/hikeExample)
+![New Hike Example](/public/images/create.png)
 
 ## Link to APP
- Coming soon
-<!-- - [YelpHikes](live link here) -->
+- [YelpHikes](https://yelphikes-made-by-mike.onrender.com/)
 
 ## Author
 
