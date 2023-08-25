@@ -20,6 +20,7 @@ YelpHikes is a full-stack application built to help you find and explore local a
 - **Full CRUD | 7 RESTful routes**
 - **Partials**
 - **Geocoding**
+- **Interactive cluster map**
 - **Sign up / Log in functionality**
 - **Password Salt&Hashing**
 - **Local image upload**
@@ -87,10 +88,18 @@ YelpHikes is a full-stack application built to help you find and explore local a
 
 ## Example Hike creation
 
-![New Hike Example](/public/images/create.png)
+<img src="/public/images/create.png" width="500" height="250">
 
 ## Link to APP
 - [YelpHikes](https://yelphikes-made-by-mike.onrender.com/)
+
+## In app images
+<img src="/public/images/homescreen.png" width="500" height="250">
+*Home Page*
+<img src="/public/images/clusterMap.png" width="500" height="250">
+*Interactive Cluster Map*
+<img src="/public/images/register.png" width="500" height="250">
+*Signup Page*
 
 ## Author
 
